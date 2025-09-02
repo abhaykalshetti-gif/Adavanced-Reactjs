@@ -1,44 +1,34 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
 
-// Define the type for the context value
-type ThemeContextType = {
-  theme: 'light' | 'dark';
+import { createContext, useContext, useState, ReactNode } from "react";
+
+type Theme = "light" | "dark";
+
+interface ThemeContextType {
+  theme: Theme;
   toggleTheme: () => void;
-};
+}
 
-// Create the context with a default undefined value
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Define the type for the provider's props
-type ThemeProviderProps = {
-  children: ReactNode;
-};
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>("light");
 
-// Create the provider component
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  // State to hold the current theme
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  // Function to toggle the theme
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-  // The value to be provided to consumers
-  const value = { theme, toggleTheme };
-
   return (
-    <ThemeContext.Provider value={value}>
-      {children}
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className={theme === "light" ? "bg-white text-black" : "bg-gray-900 text-white"} style={{ minHeight: "100vh" }}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 };
 
-// Custom hook to use the theme context
+// custom hook
 export const useTheme = () => {
   const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
+  if (!context) throw new Error("useTheme must be used within ThemeProvider");
   return context;
 };
