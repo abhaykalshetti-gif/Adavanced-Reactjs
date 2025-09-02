@@ -5,7 +5,6 @@ const UseCallback: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [dark, setDark] = useState<boolean>(false);
 
-  // useCallback memoizes the function so it only changes if 'count' changes
   const increment = useCallback(() => {
     setCount((prev) => prev + 1);
   }, []);
@@ -28,7 +27,6 @@ const UseCallback: React.FC = () => {
 
       <div style={themeStyles} className="mt-4">
         <p className="text-xl font-bold">Count: {count}</p>
-        {/* Passing increment to child */}
         <Child increment={increment} />
       </div>
     </div>

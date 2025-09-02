@@ -1,4 +1,4 @@
-// App.tsx
+
 import { useTheme } from "./ThemeContext";
 
 export default function App() {

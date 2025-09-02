@@ -23,7 +23,6 @@ const Dashboard: React.FC = () => {
 
   <hr className="mb-6 border-gray-300" />
 
-  {/* Nested routes render here */}
   <div className="bg-white shadow rounded-lg p-4">
     <Outlet />
   </div>

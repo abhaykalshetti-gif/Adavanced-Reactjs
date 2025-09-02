@@ -13,11 +13,9 @@ const ReactRouter: React.FC = () => {
   return (
     <AuthProvider>
       <Routes>
-        {/* Public Routes */}
-        <Route path="" element={<Home />} /> {/* /reactrouter */}
-        <Route path="login" element={<Login />} /> {/* /reactrouter/login */}
+        <Route path="" element={<Home />} /> 
+        <Route path="login" element={<Login />} /> 
 
-        {/* Protected Routes */}
         <Route
           path="dashboard/*"
           element={
@@ -26,12 +24,9 @@ const ReactRouter: React.FC = () => {
             </ProtectedRoute>
           }
         >
-          {/* Nested routes inside Dashboard */}
-          <Route path="profile" element={<Profile />} /> {/* /reactrouter/dashboard/profile */}
-          <Route path="settings" element={<Settings />} /> {/* /reactrouter/dashboard/settings */}
+          <Route path="profile" element={<Profile />} /> 
+          <Route path="settings" element={<Settings />} />
         </Route>
-
-        {/* Role-based route only for admin */}
         <Route
           path="admin"
           element={
